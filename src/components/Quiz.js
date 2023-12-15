@@ -6,36 +6,40 @@ export const Quiz = () => {
     const {score, setScore, setGameState} = useContext(QuizContext);
 
     const [currQuestion, setCurrQuestion] = useState(0);
-    const [optionChosen, setOptionChosen] = useState("");
-    const [check, setCheck] = useState(false)
+    // const [optionChosen, setOptionChosen] = useState("");
+    const [selectedOption, setSelectedOption] = useState(null);
 
     const nextQuestion = () => {
-        if(Questions[currQuestion].answer === optionChosen){
+        if(Questions[currQuestion].answer === selectedOption){
           setScore(score + 1);
         }
-          setCurrQuestion(currQuestion + 1)
+          setCurrQuestion(currQuestion + 1);
+          setSelectedOption(null)
     };
 
     const finishQuiz = () => {
-      if(Questions[currQuestion].answer === optionChosen){
+      if(Questions[currQuestion].answer === selectedOption){
         setScore(score + 1);
       }
       setGameState("endScreen");
     }
 
-    const checkOption = (e) => {
-      setOptionChosen(e);
-      setCheck(!check)
+    const checkOption = (option) => {
+       if(selectedOption === option){
+        setSelectedOption(null)
+       } else{
+        setSelectedOption(option)
+       }
     }
 
   return (
     <div className='quiz'>
         <p>{Questions[currQuestion].prompt}</p>
         <div  className='quiz-op'> 
-            <button className={`${check ? 'border' : ''}`}  id='bottone1' onClick={() => checkOption("A")}><strong>{Questions[currQuestion].optionA}</strong></button>
-            <button className={`${check ? 'border' : ''}`} id='bottone1' onClick={() => checkOption("B")}><strong>{Questions[currQuestion].optionB}</strong></button>
-            <button className={`${check ? 'border' : ''}`} id='bottone1' onClick={() => checkOption("C")}><strong>{Questions[currQuestion].optionC}</strong></button>
-            <button className={`${check ? 'border' : ''}`} id='bottone1' onClick={() => checkOption("D")}><strong>{Questions[currQuestion].optionD}</strong></button>
+            <button className={`${selectedOption === "A" ? 'border' : ''}`}  id='bottone1' onClick={() => checkOption("A")}><strong>{Questions[currQuestion].optionA}</strong></button>
+            <button className={`${selectedOption === "B" ? 'border' : ''}`}  id='bottone1' onClick={() => checkOption("B")}><strong>{Questions[currQuestion].optionB}</strong></button>
+            <button className={`${selectedOption === "C" ? 'border' : ''}`} id='bottone1' onClick={() => checkOption("C")}><strong>{Questions[currQuestion].optionC}</strong></button>
+            <button className={`${selectedOption === "D" ? 'border' : ''}`} id='bottone1' onClick={() => checkOption("D")}><strong>{Questions[currQuestion].optionD}</strong></button>
         </div>
         {currQuestion == Questions.length - 1 ? (
           <button className='btn' onClick={finishQuiz}>Finish Quiz</button>

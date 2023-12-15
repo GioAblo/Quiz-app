@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800;900&display=swap');
+
+
 .App {
   flex-direction: column;
   display: flex;
@@ -9,11 +12,20 @@
   border-radius: 10px;
   color: white;
   justify-content: center;
+  box-shadow: 1px 2px 13px 4px #315cfd;
+}
+
+.body {
+  background-image: url(./Helpers/quizbackground.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
 }
 
 *{
   border: none;
   box-sizing: border-box;
+  font-family: "Nunito";
 }
 
 h1 {
@@ -97,7 +109,7 @@ p {
   background: white;
   font-size: 1.2em;
   font-weight: 550;
-  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
 }
 
 .btn:hover {
