@@ -7,7 +7,7 @@ export const Quiz = () => {
 
     const [currQuestion, setCurrQuestion] = useState(0);
     const [optionChosen, setOptionChosen] = useState("");
-
+    const [check, setCheck] = useState(false)
 
     const nextQuestion = () => {
         if(Questions[currQuestion].answer === optionChosen){
@@ -23,19 +23,24 @@ export const Quiz = () => {
       setGameState("endScreen");
     }
 
+    const checkOption = (e) => {
+      setOptionChosen(e);
+      setCheck(!check)
+    }
+
   return (
-    <div>
-        <h1>{Questions[currQuestion].prompt}</h1>
-        <div>
-            <button onClick={() => setOptionChosen("A")}>{Questions[currQuestion].optionA}</button>
-            <button onClick={() => setOptionChosen("B")}>{Questions[currQuestion].optionB}</button>
-            <button onClick={() => setOptionChosen("C")}>{Questions[currQuestion].optionC}</button>
-            <button onClick={() => setOptionChosen("D")}>{Questions[currQuestion].optionD}</button>
+    <div className='quiz'>
+        <p>{Questions[currQuestion].prompt}</p>
+        <div  className='quiz-op'> 
+            <button className={`${check ? 'border' : ''}`}  id='bottone1' onClick={() => checkOption("A")}><strong>{Questions[currQuestion].optionA}</strong></button>
+            <button className={`${check ? 'border' : ''}`} id='bottone1' onClick={() => checkOption("B")}><strong>{Questions[currQuestion].optionB}</strong></button>
+            <button className={`${check ? 'border' : ''}`} id='bottone1' onClick={() => checkOption("C")}><strong>{Questions[currQuestion].optionC}</strong></button>
+            <button className={`${check ? 'border' : ''}`} id='bottone1' onClick={() => checkOption("D")}><strong>{Questions[currQuestion].optionD}</strong></button>
         </div>
         {currQuestion == Questions.length - 1 ? (
-          <button onClick={finishQuiz}>Finish Quiz</button>
+          <button className='btn' onClick={finishQuiz}>Finish Quiz</button>
         ) : (
-          <button onClick={nextQuestion}>Next</button>
+          <button className='btn' onClick={nextQuestion}>Next</button>
         )}
         
     </div>

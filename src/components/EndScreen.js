@@ -1,6 +1,7 @@
 import React, {useContext} from 'react';
 import { QuizContext } from '../Helpers/Contexts';
 import { Questions } from '../Helpers/QuestionBank';
+import "../App.css"
 
 export const EndScreen = () => {
 
@@ -12,10 +13,10 @@ export const EndScreen = () => {
     }
 
   return (
-    <div>
+    <div className='endscreen'>
         <h2>Quiz Finished</h2>
-        <p>{score}/{Questions.length}</p>
-        <button onClick={resetQuiz}>Reset</button>
+        <p>{score} correct answers out of {Questions.length} </p>
+        <button className='btn' onClick={resetQuiz}>Reset</button>
     </div>
   )
 }
